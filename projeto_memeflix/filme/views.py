@@ -18,6 +18,13 @@ class Detalhesfilme(DetailView):
     model = Filme
     # object >> 1 item do modelo
 
+    def get(self, request, *args, **kwargs):
+        #contabiliza uma visualização
+        filme = self.get_object()
+        filme.visualizacoes += 1
+        filme.save()
+        return super().get(request, *args, **kwargs) # direciona o usuario para a url final
+
     def get_contex_data(self, **kwargs):
         context = super(Detalhesfilme, self).get_context_data(**kwargs)
         filmes_relacionados = Filme.objects.filter(categoria=self.get_object().categoria)
