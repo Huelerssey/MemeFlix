@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+HomeFilmes MemeFlix
+{% endblock %}
+
+{% block content %}
+    <div class="py-16">
+        <h1>Essa é minha HomeFilme</h1>
+        {% for filme in object_list %}
+            <hr>
+            <a href="{% url 'filme:detalhesfilme' filme.pk %}"><p>{{ filme }}</p></a>
+            <p>{{ filme.descricao }}</p>
+            <img src="{{ filme.thumb.url }}">
+        {% endfor %}
+    </div>
+
+    <div class="py-10">
+        <h2>Novo</h2>
+        {{ lista_filmes_recentes }}
+    </div>
+
+    <div class="py-10">
+        <h2>Em alta</h2>
+        {{ lista_filmes_emalta }}
+    </div>
+{% endblock %}
